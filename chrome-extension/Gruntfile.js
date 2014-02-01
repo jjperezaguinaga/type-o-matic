@@ -146,8 +146,8 @@ module.exports = function (grunt) {
                 dest: '<%= yeoman.dist %>'
             },
             html: [
-                '<%= yeoman.app %>/popup.html',
-                '<%= yeoman.app %>/options.html'
+                '<%= yeoman.app %>/index.html',
+                '<%= yeoman.app %>/panel.html'
             ]
         },
         usemin: {
@@ -190,19 +190,14 @@ module.exports = function (grunt) {
         htmlmin: {
             dist: {
                 options: {
-                    /*removeCommentsFromCDATA: true,
-                    // https://github.com/yeoman/grunt-usemin/issues/44
-                    //collapseWhitespace: true,
+                    collapseWhitespace: true,
                     collapseBooleanAttributes: true,
-                    removeAttributeQuotes: true,
-                    removeRedundantAttributes: true,
-                    useShortDoctype: true,
-                    removeEmptyAttributes: true,
-                    removeOptionalTags: true*/
+                    removeCommentsFromCDATA: true,
+                    removeOptionalTags: true
                 },
                 files: [{
                     expand: true,
-                    cwd: '<%= yeoman.app %>',
+                    cwd: '<%= yeoman.dist %>',
                     src: '*.html',
                     dest: '<%= yeoman.dist %>'
                 }]
@@ -218,6 +213,7 @@ module.exports = function (grunt) {
                     dest: '<%= yeoman.dist %>',
                     src: [
                         '*.{ico,png,txt}',
+                        '*.html',
                         'images/{,*/}*.{webp,gif}',
                         '_locales/{,*/}*.json'
                     ]
@@ -244,8 +240,7 @@ module.exports = function (grunt) {
                 'coffee',
                 'compass:dist',
                 'imagemin',
-                'svgmin',
-                'htmlmin'
+                'svgmin'
             ]
         },
         chromeManifest: {
@@ -253,12 +248,8 @@ module.exports = function (grunt) {
                 options: {
                     buildnumber: true
                 },
-                files: [
-                  {
-                    src: '<%= yeoman.app %>',
-                    dest: '<%= yeoman.dist %>'    
-                  }
-                ]
+                src: '<%= yeoman.app %>',
+                dest: '<%= yeoman.dist %>'
             }
         },
         compress: {
@@ -293,6 +284,7 @@ module.exports = function (grunt) {
         'uglify',
         'copy',
         'usemin',
+        'htmlmin',
         'compress'
     ]);
 
